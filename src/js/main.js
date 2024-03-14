@@ -6,7 +6,7 @@ BtnEl.addEventListener('click', refreshData);
 let issMarker;
 
 // URL för att hämta ISS position från OpenNotify API
-const issURL = 'http://api.open-notify.org/iss-now.json';
+const issURL = 'https://api.open-notify.org/iss-now.json';
 
 // URL för att hämta väderdata från OpenWeatherMap API
 const weatherURL = 'https://api.openweathermap.org/data/2.5/weather';
