@@ -6,7 +6,7 @@ BtnEl.addEventListener('click', refreshData);
 let issMarker;
 
 // URL för att hämta ISS position från OpenNotify API
-const issURL = 'https://api.open-notify.org/iss-now.json';
+const issURL = 'https://api.wheretheiss.at/v1/satellites/25544';
 
 // URL för att hämta väderdata från OpenWeatherMap API
 const weatherURL = 'https://api.openweathermap.org/data/2.5/weather';
@@ -41,7 +41,7 @@ function refreshData() {
     
     // Funktion för att hämta tidzonen baserat på latitud och longitud från timezoneDB API
     function getTimeZone(latitude, longitude) {
-        const timeZoneURL = `https://api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
+        const timeZoneURL = `http://api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
 
         return fetch(timeZoneURL)
             .then(response => {
@@ -67,7 +67,8 @@ function refreshData() {
         })
         .then(data => {
             // Extrahera latitud och longitud från API-svaret
-            const { latitude, longitude } = data.iss_position;
+            const latitude = data.latitude;
+            const longitude = data.longitude;
 
             // Använd latitud och longitud för att hämta väderdata från OpenWeatherMap API
             return fetch(`${weatherURL}?lat=${latitude}&lon=${longitude}&lang=sv&appid=${apiKey}`);
@@ -122,11 +123,13 @@ function refreshData() {
         })
         .then(data => {
             // Extrahera latitud och longitud från API-svaret
-            const { latitude, longitude } = data.iss_position;
+            const latitude = data.latitude.toFixed(5); 
+            const longitude = data.longitude.toFixed(5);
+            const altitude = Math.floor(data.altitude);
 
             // Skapa en markör för ISS position och lägg till den på kartan
             issMarker = L.marker([latitude, longitude], {icon: shipIcon}).addTo(map);
-            issMarker.bindPopup('ISS Position. ' + latitude + ', ' + longitude).openPopup(); // Lägger till popup med text
+            issMarker.bindPopup('ISS svävar'+altitude+' kilometer över jordens yta. Position: ' + latitude + ', ' + longitude+'.').openPopup(); // Lägger till popup med text
 
             // Flytta kartan till ISS position
             map.setView([latitude, longitude], 2);
