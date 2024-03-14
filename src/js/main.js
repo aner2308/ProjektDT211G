@@ -25,6 +25,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+let shipIcon = L.icon({
+    iconUrl: 'img/12.jpg',
+
+    iconSize:     [50, 50], // size of the icon
+    iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 function refreshData() {
 
     if (issMarker) {
@@ -117,7 +125,7 @@ function refreshData() {
             const { latitude, longitude } = data.iss_position;
 
             // Skapa en markör för ISS position och lägg till den på kartan
-            issMarker = L.marker([latitude, longitude]).addTo(map);
+            issMarker = L.marker([latitude, longitude], {icon: shipIcon}).addTo(map);
             issMarker.bindPopup('ISS Position. ' + latitude + ', ' + longitude).openPopup(); // Lägger till popup med text
 
             // Flytta kartan till ISS position
