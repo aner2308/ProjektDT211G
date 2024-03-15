@@ -3,6 +3,11 @@
 const BtnEl = document.getElementById("Btn");
 BtnEl.addEventListener('click', refreshData);
 
+//Containers för mina textrutor under kartan
+const heightInfoEl = document.getElementById('heightInfo');
+const weatherInfoEl = document.getElementById('weatherInfo');
+const timeInfoEl = document.getElementById('timeInfo');
+
 let issMarker;
 
 // URL för att hämta ISS position från OpenNotify API
@@ -18,27 +23,51 @@ const apiKey = '2bb4d29c3b8f12d9cfe9969397ac0cbd';
 const timeZoneApiKey = 'ZGRYZ2CN6KRN';
 
 //Skapar en karta med koordinater[0,0] och zoomnivå 2
-const map = L.map('map').setView([0, 0], 2);
+const map = L.map('map').setView([40, 0], 2);
 
 // Lägg till en OpenStreetMap-baslayer till kartan
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-let shipIcon = L.icon({
-    iconUrl: 'img/12.jpg',
+//Olika kartbilder att kunna använda
+const CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20
+});
 
-    iconSize:     [50, 50], // size of the icon
-    iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+const Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+const Esri_WorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 8
+});
+
+const USGS_USImagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 20
+});
+
+CartoDB_Voyager.addTo(map);
+
+let shipIcon = L.icon({
+    iconUrl: '12.jpg',
+
+    iconSize: [50, 50], // size of the icon
+    iconAnchor: [25, 25], // point of the icon which will correspond to marker's location
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
 function refreshData() {
 
-    if (issMarker) {
-       map.removeLayer(issMarker); 
+    if (heightInfoEl.innerHTML !== '') {
+            heightInfoEl.innerHTML = '';
+            timeInfoEl.innerHTML = '';
+            weatherInfoEl.innerHTML = '';
     }
-    
+
+    if (issMarker) {
+        map.removeLayer(issMarker);
+    }
+
     // Funktion för att hämta tidzonen baserat på latitud och longitud från timezoneDB API
     function getTimeZone(latitude, longitude) {
         const timeZoneURL = `http://api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
@@ -80,8 +109,6 @@ function refreshData() {
             return response.json();
         })
         .then(Data => {
-            // Hantera väderdatan från OpenWeatherMap API
-            console.log('Väderdata:', Data);
 
             // Extrahera temperatur i Celsius från väderdatan (omvandla från Kelvin)
             const temperatureCelsius = Math.round(Data.main.temp - 273.15);
@@ -97,6 +124,17 @@ function refreshData() {
 
             console.log(weatherText);
 
+            //Sätter opacity till noll innan animering
+            weatherInfoEl.style.opacity = 0;
+
+            //imer för att fördröja intoning
+            setTimeout(() => {
+                // Uppdatera innerHTML för weatherInfo
+                weatherInfoEl.innerHTML = `<p>På kartan ser du vart ISS rymdstation befinner sig just nu. Nedanför stationen har vi detta väder:</p>`;
+                weatherInfoEl.innerHTML += `<p>${weatherText}</p>`;
+                weatherInfoEl.style.opacity = 1;
+            }, 2500);
+
             // Returnera data för nästa kedja av then()
             return { latitude: Data.coord.lat, longitude: Data.coord.lon };
         })
@@ -108,6 +146,15 @@ function refreshData() {
             //Loggar den lokala tiden och datumet i consolen
             console.log('Lokal tid:', localTime);
 
+            //Sätter opacity till noll innan animering
+            timeInfoEl.style.opacity = 0;
+
+            //Timer för att fördröja intoning
+            setTimeout(() => {
+                // Uppdatera innerHTML för TimeInfo
+                timeInfoEl.innerHTML = `<p>Den lokala tiden är ${localTime}.</p>`
+                timeInfoEl.style.opacity = 1;
+            }, 4000);
         })
         .catch(error => {
             console.error('Problem med fetch anropet:', error);
@@ -123,16 +170,26 @@ function refreshData() {
         })
         .then(data => {
             // Extrahera latitud och longitud från API-svaret
-            const latitude = data.latitude.toFixed(5); 
+            const latitude = data.latitude.toFixed(5);
             const longitude = data.longitude.toFixed(5);
             const altitude = Math.floor(data.altitude);
 
             // Skapa en markör för ISS position och lägg till den på kartan
-            issMarker = L.marker([latitude, longitude], {icon: shipIcon}).addTo(map);
-            issMarker.bindPopup('ISS svävar'+altitude+' kilometer över jordens yta. Position: ' + latitude + ', ' + longitude+'.').openPopup(); // Lägger till popup med text
+            issMarker = L.marker([latitude, longitude], { icon: shipIcon }).addTo(map);
+            issMarker.bindPopup('Position: ' + latitude + ', ' + longitude + '.').openPopup(); // Lägger till popup med text
 
             // Flytta kartan till ISS position
             map.setView([latitude, longitude], 2);
+
+            //Sätter opacity till noll innan animering
+            heightInfoEl.style.opacity = 0;
+
+            //Timer för att fördröja intoning
+            setTimeout(() => {
+                // Uppdatera innerHTML för heightInfo
+                heightInfoEl.innerHTML = `<p>ISS svävar ${altitude} kilometer över jordens yta.</p>`;
+                heightInfoEl.style.opacity = 1;
+            }, 1000);
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
