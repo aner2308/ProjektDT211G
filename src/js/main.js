@@ -34,6 +34,10 @@ const CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertil
     maxZoom: 20
 });
 
+const CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+	maxZoom: 20
+});
+
 const Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 });
@@ -76,6 +80,17 @@ function refreshData() {
             .then(timeZoneData => {
                 // Extrahera tidzonen från API-svaret
                 const localTime = timeZoneData.formatted;
+
+                const timeOfDay = new Date(timeZoneData.formatted);
+                let hourOfDay = timeOfDay.getHours()
+                
+                if (hourOfDay >=6 && hourOfDay <20) {
+                    map.removeLayer(CartoDB_DarkMatter);
+                    CartoDB_Voyager.addTo(map);
+                } else {
+                    map.removeLayer(CartoDB_Voyager);
+                    CartoDB_DarkMatter.addTo(map);
+                }
                 return localTime;
             });
     }
