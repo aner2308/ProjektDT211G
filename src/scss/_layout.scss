@@ -1,10 +1,88 @@
-#map {
-    height: 40vw;
-    width: 40vw;
-    border-radius: 50%;
-    box-shadow: 0 0 50px lightblue;
+@use "keyframes";
+
+
+#heightInfo,
+#weatherInfo,
+#timeInfo {
+    transition: opacity 2s ease;
 }
 
-#heightInfo, #weatherInfo, #timeInfo {
-    transition: opacity 2s ease;
+body {
+    font-size: 66,5%;
+    margin: 0;
+    background-color: rgb(5, 0, 26);
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: auto;
+
+    #rubrik {
+        grid-area: 1/2/2/3;
+        color: whitesmoke;
+        text-align: center;
+    }
+
+    #Btn {
+        grid-area: 2/2/3/3;
+    }
+
+    #map {
+        grid-area: 3/2/4/3;
+        height: 40vw;
+        width: 40vw;
+        border-radius: 50%;
+        box-shadow: inset -2em -2em 2em black,
+        0 0 50px lightblue;
+        margin: auto;
+        margin-top: 10vw;
+        margin-bottom: 10vw;
+        z-index: 1;
+    }
+
+    #scale {
+        grid-area: 3/2/4/3;
+        margin: auto;
+        -webkit-animation: scaleMe 10s ease-in-out infinite alternate;
+        animation: scaleMe 10s ease-in-out infinite alternate;
+    }
+
+    #skew {
+        grid-area: 3/2/4/3;
+        margin: auto;
+        -webkit-animation: skew 10s ease-in-out infinite alternate;
+        animation: skew 10s ease-in-out infinite alternate;
+    }
+
+    #moon {
+        grid-area: 3/2/4/3;
+        width: 5vw;
+        height: 5vw;
+        background-color: whitesmoke;
+        border-radius: 50%;
+        margin: auto;
+        box-shadow: inset -1vw -1vw 2vw rgb(43, 43, 43),
+        0 0 10px lightblue;
+        -webkit-animation: circle 20s linear infinite;
+        animation: circle 20s linear infinite;
+    }
+
+    #heightInfo {
+        grid-area: 4/2/5/3;
+        text-align: center;
+        color: whitesmoke;
+    }
+
+    #weatherInfo {
+        grid-area: 5/2/6/3;
+        text-align: center;
+        color: whitesmoke;
+    }
+
+    #timeInfo {
+        grid-area: 6/2/7/3;
+        text-align: center;
+        color: whitesmoke;
+    }
 }

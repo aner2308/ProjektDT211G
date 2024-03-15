@@ -23,7 +23,7 @@ const apiKey = '2bb4d29c3b8f12d9cfe9969397ac0cbd';
 const timeZoneApiKey = 'ZGRYZ2CN6KRN';
 
 //Skapar en karta med koordinater[0,0] och zoomnivå 2
-const map = L.map('map').setView([40, 0], 2);
+const map = L.map('map', { zoomControl: false }).setView([40, 0], 2);
 
 // Lägg till en OpenStreetMap-baslayer till kartan
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -48,22 +48,16 @@ const USGS_USImagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/
 
 CartoDB_Voyager.addTo(map);
 
-let shipIcon = L.icon({
-    iconUrl: '12.jpg',
-
-    iconSize: [50, 50], // size of the icon
-    iconAnchor: [25, 25], // point of the icon which will correspond to marker's location
-    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
-
 function refreshData() {
 
+    //Tömmer tidigare data om den existerar
     if (heightInfoEl.innerHTML !== '') {
             heightInfoEl.innerHTML = '';
             timeInfoEl.innerHTML = '';
             weatherInfoEl.innerHTML = '';
     }
 
+    //Tar bort tidigare kartmarkering om den existerar
     if (issMarker) {
         map.removeLayer(issMarker);
     }
@@ -119,19 +113,14 @@ function refreshData() {
             // Extrahera väderbeskrivning från väderdatan
             const weatherDescription = Data.weather[0].description;
 
-            // Skapa en textsträng med temperatur, vindhastighet och väderbeskrivning
-            const weatherText = `Temperatur: ${temperatureCelsius}°C, Vindhastighet: ${windSpeed} m/s, Väder: ${weatherDescription}`;
-
-            console.log(weatherText);
-
             //Sätter opacity till noll innan animering
             weatherInfoEl.style.opacity = 0;
 
             //imer för att fördröja intoning
             setTimeout(() => {
                 // Uppdatera innerHTML för weatherInfo
-                weatherInfoEl.innerHTML = `<p>På kartan ser du vart ISS rymdstation befinner sig just nu. Nedanför stationen har vi detta väder:</p>`;
-                weatherInfoEl.innerHTML += `<p>${weatherText}</p>`;
+                weatherInfoEl.innerHTML = `<p>På kartan ser du vart ISS rymdstation befinner sig just nu.<br>Nedanför stationen har vi detta väder:</p>`;
+                weatherInfoEl.innerHTML += `<p>Temperatur: ${temperatureCelsius}°C <br>Vindhastighet: ${windSpeed} m/s <br>Väder: ${weatherDescription}</p>`;
                 weatherInfoEl.style.opacity = 1;
             }, 2500);
 
@@ -175,7 +164,7 @@ function refreshData() {
             const altitude = Math.floor(data.altitude);
 
             // Skapa en markör för ISS position och lägg till den på kartan
-            issMarker = L.marker([latitude, longitude], { icon: shipIcon }).addTo(map);
+            issMarker = L.marker([latitude, longitude]).addTo(map);
             issMarker.bindPopup('Position: ' + latitude + ', ' + longitude + '.').openPopup(); // Lägger till popup med text
 
             // Flytta kartan till ISS position
