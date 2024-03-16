@@ -1,11 +1,11 @@
 @-webkit-keyframes circle {
 
     0% {
-        transform: rotate(45deg)translateY(-50vw)rotate(0deg);
+        transform: rotate(0deg)translateY(-50vw)rotate(0deg);
     }
 
     100% {
-        transform: rotate(405deg)translateY(-50vw)rotate(-360deg);
+        transform: rotate(360deg)translateY(-50vw)rotate(-360deg);
     }
 
 }
@@ -13,11 +13,11 @@
 @-webkit-keyframes skew {
 
     0% {
-        transform: translateY(35vw)translatex(-35vw);
+        transform: translateY(40vw);
     }
 
     100% {
-        transform: translateY(-35vw)translatex(35vw);
+        transform: translateY(-40vw);
     }
 
 }

@@ -38,18 +38,6 @@ const CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_a
 	maxZoom: 20
 });
 
-const Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-});
-
-const Esri_WorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 8
-});
-
-const USGS_USImagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 20
-});
-
 CartoDB_Voyager.addTo(map);
 
 function refreshData() {
@@ -180,7 +168,7 @@ function refreshData() {
 
             // Skapa en markör för ISS position och lägg till den på kartan
             issMarker = L.marker([latitude, longitude]).addTo(map);
-            issMarker.bindPopup('Position: ' + latitude + ', ' + longitude + '.').openPopup(); // Lägger till popup med text
+            //issMarker.bindPopup('Position: ' + latitude + ', ' + longitude + '.').openPopup(); // Lägger till popup med text
 
             // Flytta kartan till ISS position
             map.setView([latitude, longitude], 2);
