@@ -59,7 +59,7 @@ function refreshData() {
 
     // Funktion för att hämta tidzonen baserat på latitud och longitud från timezoneDB API
     function getTimeZone(latitude, longitude) {
-        const timeZoneURL = `http://api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
+        const timeZoneURL = `https://api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
 
         return fetch(timeZoneURL)
             .then(response => {
