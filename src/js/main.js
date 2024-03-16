@@ -3,10 +3,13 @@
 const BtnEl = document.getElementById("Btn");
 BtnEl.addEventListener('click', refreshData);
 
+const moonEl = document.getElementById("moon");
+
 //Containers för mina textrutor under kartan
 const heightInfoEl = document.getElementById('heightInfo');
 const weatherInfoEl = document.getElementById('weatherInfo');
 const timeInfoEl = document.getElementById('timeInfo');
+
 
 let issMarker;
 
@@ -35,7 +38,7 @@ const CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertil
 });
 
 const CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-	maxZoom: 20
+    maxZoom: 20
 });
 
 CartoDB_Voyager.addTo(map);
@@ -44,9 +47,9 @@ function refreshData() {
 
     //Tömmer tidigare data om den existerar
     if (heightInfoEl.innerHTML !== '') {
-            heightInfoEl.innerHTML = '';
-            timeInfoEl.innerHTML = '';
-            weatherInfoEl.innerHTML = '';
+        heightInfoEl.innerHTML = '';
+        timeInfoEl.innerHTML = '';
+        weatherInfoEl.innerHTML = '';
     }
 
     //Tar bort tidigare kartmarkering om den existerar
@@ -66,18 +69,24 @@ function refreshData() {
                 return response.json();
             })
             .then(timeZoneData => {
-                // Extrahera tidzonen från API-svaret
+                // Extrahera tidzonen från API-svaret.
                 const localTime = timeZoneData.formatted;
 
                 const timeOfDay = new Date(timeZoneData.formatted);
                 let hourOfDay = timeOfDay.getHours()
-                
-                if (hourOfDay >=6 && hourOfDay <20) {
+
+                //Byter kartbild och månens utseende beroende på tid på dagen.
+                if (hourOfDay >= 6 && hourOfDay < 20) {
                     map.removeLayer(CartoDB_DarkMatter);
                     CartoDB_Voyager.addTo(map);
+                    moonEl.style.backgroundColor = "whitesmoke";
+                    moonEl.style.boxShadow = "inset -1vw -1vw 1vw rgb(43, 43, 43)",
+                    "0 0 10px lightblue";
                 } else {
                     map.removeLayer(CartoDB_Voyager);
                     CartoDB_DarkMatter.addTo(map);
+                    moonEl.style.backgroundColor = "black"; 
+                    moonEl.style.boxShadow = "0 0 10px lightblue";
                 }
                 return localTime;
             });
@@ -125,7 +134,7 @@ function refreshData() {
                 weatherInfoEl.innerHTML = `<p>På kartan ser du vart ISS rymdstation befinner sig just nu.<br>Nedanför stationen har vi detta väder:</p>`;
                 weatherInfoEl.innerHTML += `<p>Temperatur: ${temperatureCelsius}°C <br>Vindhastighet: ${windSpeed} m/s <br>Väder: ${weatherDescription}</p>`;
                 weatherInfoEl.style.opacity = 1;
-            }, 2500);
+            }, 2000);
 
             // Returnera data för nästa kedja av then()
             return { latitude: Data.coord.lat, longitude: Data.coord.lon };
@@ -146,7 +155,7 @@ function refreshData() {
                 // Uppdatera innerHTML för TimeInfo
                 timeInfoEl.innerHTML = `<p>Den lokala tiden är ${localTime}.</p>`
                 timeInfoEl.style.opacity = 1;
-            }, 4000);
+            }, 3000);
         })
         .catch(error => {
             console.error('Problem med fetch anropet:', error);

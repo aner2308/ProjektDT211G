@@ -8,8 +8,11 @@
     }
 
     @else if $storlek ==3 {
+        font-size: 1.2rem;
+    }
+
+    @else if $storlek ==4 {
         font-size: 1rem;
-        font-style: italic;
     }
 
     @else {

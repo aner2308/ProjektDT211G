@@ -35,7 +35,31 @@ body {
 
     #Btn {
         grid-area: 2/2/3/3;
+        width: 10em;
+        height: 2em;
+        margin: auto;
+        margin-top: 5vw;
+        background-color: hsl(0, 0%, 0%, 0.6);
+        color: whitesmoke;
+        text-transform: uppercase;
+        @include components.rubrikstorlek(2);
+        font-family: "Space Grotesk", sans-serif;
+        letter-spacing: 0.1em;
+        border-style: solid;
+        border-width: 0.1em;
+        border-color: whitesmoke;
+        transition: 0.5s;
     }
+
+    #Btn:hover {
+        cursor: pointer;
+        border-color: var(--clr);
+        letter-spacing: 0.15em;
+        width: 11em;
+        border-width: 0.1em;
+        box-shadow: inset 0 0 1em var(--clr), 0 0 1em var(--clr);
+    }
+
 
     #mapShade {
         grid-area: 3/2/4/3;
@@ -44,8 +68,8 @@ body {
         border-radius: 50%;
         box-shadow: inset -3em -3em 3em black;
         margin: auto;
-        margin-top: 10vw;
-        margin-bottom: 10vw;
+        margin-top: 5vw;
+        margin-bottom: 5vw;
         z-index: 2;
     }
 
@@ -56,8 +80,8 @@ body {
         border-radius: 50%;
         box-shadow: 0 0 50px lightblue;
         margin: auto;
-        margin-top: 10vw;
-        margin-bottom: 10vw;
+        margin-top: 5vw;
+        margin-bottom: 5vw;
         z-index: 1;
     }
 
@@ -88,21 +112,27 @@ body {
         animation: circle 20s linear infinite;
     }
 
+
+
     #heightInfo {
         grid-area: 4/2/5/3;
         text-align: center;
         color: whitesmoke;
+        @include components.rubrikstorlek(3);
     }
 
     #weatherInfo {
         grid-area: 5/2/6/3;
         text-align: center;
         color: whitesmoke;
+        @include components.rubrikstorlek(3);
     }
 
     #timeInfo {
         grid-area: 6/2/7/3;
         text-align: center;
         color: whitesmoke;
+        @include components.rubrikstorlek(3);
     }
+
 }
