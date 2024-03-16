@@ -4,6 +4,7 @@ const BtnEl = document.getElementById("Btn");
 BtnEl.addEventListener('click', refreshData);
 
 const moonEl = document.getElementById("moon");
+const sunEl = document.getElementById("sun");
 
 //Containers för mina textrutor under kartan
 const heightInfoEl = document.getElementById('heightInfo');
@@ -82,11 +83,13 @@ function refreshData() {
                     moonEl.style.backgroundColor = "whitesmoke";
                     moonEl.style.boxShadow = "inset -1vw -1vw 1vw rgb(43, 43, 43)",
                     "0 0 10px lightblue";
+                    sunEl.style.display = "none";
                 } else {
                     map.removeLayer(CartoDB_Voyager);
                     CartoDB_DarkMatter.addTo(map);
                     moonEl.style.backgroundColor = "black"; 
                     moonEl.style.boxShadow = "0 0 10px lightblue";
+                    sunEl.style.display = "block";
                 }
                 return localTime;
             });
