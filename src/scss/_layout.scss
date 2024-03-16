@@ -12,7 +12,7 @@ body {
     margin: 0;
     background: url(../img/space2.jpg);
     background-size: cover;
-    min-height: 200vh;
+    min-height: 150vh;
     font-family: "Space Grotesk", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -76,7 +76,7 @@ body {
         height: 40vw;
         width: 40vw;
         border-radius: 50%;
-        box-shadow: inset -3em -3em 3em black;
+        box-shadow: inset -7vw -7vw 8vw black;
         margin: auto;
         margin-top: 5vw;
         margin-bottom: 5vw;
@@ -145,4 +145,8 @@ body {
         @include components.rubrikstorlek(3);
     }
 
+}
+
+audio {
+    display: none;
 }
