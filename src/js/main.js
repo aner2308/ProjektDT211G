@@ -134,7 +134,7 @@ function refreshData() {
             //imer för att fördröja intoning
             setTimeout(() => {
                 // Uppdatera innerHTML för weatherInfo
-                weatherInfoEl.innerHTML = `<p>På kartan ser du vart ISS rymdstation befinner sig just nu.<br>Nedanför stationen har vi detta väder:</p>`;
+                weatherInfoEl.innerHTML = `<p>Nedanför stationen har vi detta väder:</p>`;
                 weatherInfoEl.innerHTML += `<p>Temperatur: ${temperatureCelsius}°C <br>Vindhastighet: ${windSpeed} m/s <br>Väder: ${weatherDescription}</p>`;
                 weatherInfoEl.style.opacity = 1;
             }, 2000);
