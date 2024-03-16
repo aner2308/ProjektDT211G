@@ -18,23 +18,23 @@
         0% {
             transform: rotate(0deg)translateY(-70vw)rotate(0deg);
         }
-    
+
         100% {
             transform: rotate(360deg)translateY(-70vw)rotate(-360deg);
         }
-    
+
     }
-    
+
     @keyframes circle {
-    
+
         0% {
             transform: rotate(0deg)translateY(-70vw)rotate(0deg);
         }
-    
+
         100% {
             transform: rotate(360deg)translateY(-70vw)rotate(-360deg);
         }
-    
+
     }
 
     #weatherInfo {
@@ -46,13 +46,30 @@
 
     #Btn {
         font-size: 2.4em;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    #container {
+        grid-template-columns: 10% 80% 10%;
+    }
+
+    #Btn {
+        font-size: 2em;
     }
 }
 
 @media screen and (max-width: 450px) {
 
-    #container {
-        grid-template-columns: 10% 80% 10%;
+
+    #rubrik {
+        font-size: 1.4rem;
+    }
+
+    .brödtext {
+        font-size: 0.8rem;
     }
 
     #mapShade {
@@ -70,23 +87,40 @@
         0% {
             transform: rotate(0deg)translateY(-80vw)rotate(0deg);
         }
-    
+
         100% {
             transform: rotate(360deg)translateY(-80vw)rotate(-360deg);
         }
-    
+
     }
-    
+
     @keyframes circle {
-    
+
         0% {
             transform: rotate(0deg)translateY(-82vw)rotate(0deg);
         }
-    
+
         100% {
             transform: rotate(360deg)translateY(-82vw)rotate(-360deg);
         }
-    
+
+    }
+
+    #heightInfo {
+        margin-top: 10px;
+        font-size: 1.4em;
+        line-height: 1.2rem;
+        min-height: 80px;
+    }
+    #weatherInfo {
+        font-size: 1.4em;
+        line-height: 1.2rem;
+        min-height: 120px;
+    }
+    #timeInfo {
+        font-size: 1.4em;
+        line-height: 1.2rem;
+        min-height: 100;
     }
 
 }

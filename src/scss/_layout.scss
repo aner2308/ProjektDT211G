@@ -20,34 +20,62 @@ body {
     text-transform: uppercase;
 }
 
-
 #container {
     display: grid;
     grid-template-columns: 20% 60% 20%;
     grid-template-rows: auto;
 }
 
-#rubrik {
+#bildISS {
+    margin-top: 50px;
     grid-area: 1/2/2/3;
+    width: 10vw;
+    -webkit-animation: hover 10s ease-in-out infinite alternate;
+    animation: hover 15s ease-in infinite;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#rubrik {
+    grid-area: 2/2/3/3;
     color: whitesmoke;
     text-align: center;
     @include components.rubrikstorlek(2);
 }
 
-#brödtext {
-    grid-area: 2/2/3/3;
+.brödtext {
     color: whitesmoke;
     text-align: center;
     @include components.rubrikstorlek(3);
+    line-height: 1.4em;
+}
+
+.ett {
+    grid-area: 3/2/4/3;
     animation: fade 5s ease;
 }
 
-#brödtext.loaded {
+.två {
+    grid-area: 4/2/5/3;
+    animation: fade 5s ease forwards;
+    opacity: 0;
+    animation-delay: 3s;
+}
+
+.tre {
+    grid-area: 5/2/6/3;
+    animation: fade 5s ease forwards;
+    opacity: 0;
+    animation-delay: 6s;
+}
+
+.brödtext.loaded {
     color: whitesmoke;
 }
 
+
 #Btn {
-    grid-area: 3/2/4/3;
+    grid-area: 6/2/7/3;
     width: 10em;
     height: 2em;
     margin: auto;
@@ -74,7 +102,7 @@ body {
 }
 
 #sun {
-    grid-area: 4/2/5/3;
+    grid-area: 7/2/8/3;
     height: 1vw;
     width: 1vw;
     background-color: rgb(255, 255, 115);
@@ -85,7 +113,7 @@ body {
 
 
 #mapShade {
-    grid-area: 4/2/5/3;
+    grid-area: 7/2/8/3;
     height: 40vw;
     width: 40vw;
     border-radius: 50%;
@@ -97,7 +125,7 @@ body {
 }
 
 #map {
-    grid-area: 4/2/5/3;
+    grid-area: 7/2/8/3;
     height: 40vw;
     width: 40vw;
     border-radius: 50%;
@@ -109,21 +137,21 @@ body {
 }
 
 #scale {
-    grid-area: 4/2/5/3;
+    grid-area: 7/2/8/3;
     margin: auto;
     -webkit-animation: scaleMe 10s ease-in-out infinite alternate;
     animation: scaleMe 10s ease-in-out infinite alternate;
 }
 
 #skew {
-    grid-area: 4/2/5/3;
+    grid-area: 7/2/8/3;
     margin: auto;
     -webkit-animation: skew 10s ease-in-out infinite alternate;
     animation: skew 10s ease-in-out infinite alternate;
 }
 
 #moon {
-    grid-area: 4/2/5/3;
+    grid-area: 7/2/8/3;
     width: 5vw;
     height: 5vw;
     background-color: whitesmoke;
@@ -138,7 +166,7 @@ body {
 
 
 #heightInfo {
-    grid-area: 5/2/6/3;
+    grid-area: 8/2/9/3;
     text-align: left;
     color: whitesmoke;
     @include components.rubrikstorlek(3);
@@ -148,16 +176,16 @@ body {
 }
 
 #weatherInfo {
-    grid-area: 6/2/7/3;
+    grid-area: 9/2/10/3;
     text-align: left;
     color: whitesmoke;
     @include components.rubrikstorlek(3);
-    min-height: 100px;
+    min-height: 150px;
     padding: 0px 20px;
 }
 
 #timeInfo {
-    grid-area: 7/2/8/3;
+    grid-area: 10/2/11/3;
     text-align: left;
     color: whitesmoke;
     @include components.rubrikstorlek(3);
