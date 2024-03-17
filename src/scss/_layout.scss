@@ -11,8 +11,9 @@ body {
     font-size: 62.5%;
     margin: 0;
     background: url(../img/space2.jpg);
-    background-size: cover;
+    background-size: contain;
     min-height: 150vh;
+    overflow: scroll;
     font-family: "Space Grotesk", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;

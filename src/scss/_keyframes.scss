@@ -100,7 +100,7 @@
 
 @keyframes hover {
     0% {
-        transform: rotate(0deg)translate(-50vw)translateY(20vw)scale(0.3, 0.3);
+        transform: rotate(0deg)translate(-50vw)translateY(20vw)scale(0.8, 0.8);
     }
     20% {
         box-shadow: none;
@@ -139,13 +139,13 @@
         box-shadow: none;
     }
     100% {
-        transform: rotate(0deg)translate(60vw)translateY(-20vw)rotate(100deg)scale(1.2, 1.2);
+        transform: rotate(0deg)translate(50vw)translateY(-20vw)rotate(100deg)scale(1, 1);
     }
 }
 
 @-webkit-keyframes hover {
     0% {
-        transform: rotate(0deg)translate(-20vw)scale(0.3, 0.3);
+        transform: rotate(0deg)translate(-50vw)translateY(20vw)scale(0.8, 0.8);
     }
     20% {
         box-shadow: none;
@@ -184,6 +184,6 @@
         box-shadow: none;
     }
     100% {
-        transform: rotate(0deg)translate(100vw)translateY(-20vw)rotate(100deg)scale(0.8, 0.8);
+        transform: rotate(0deg)translate(50vw)translateY(-20vw)rotate(100deg)scale(0.2, 0.2);
     }
 }
