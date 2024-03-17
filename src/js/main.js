@@ -147,9 +147,6 @@ function refreshData() {
             return getTimeZone(coordinates.latitude, coordinates.longitude);
         })
         .then(localTime => {
-            //Loggar den lokala tiden och datumet i consolen
-            console.log('Lokal tid:', localTime);
-
             //Sätter opacity till noll innan animering
             timeInfoEl.style.opacity = 0;
 
