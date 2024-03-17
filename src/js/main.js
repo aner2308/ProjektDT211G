@@ -131,7 +131,7 @@ function refreshData() {
             //Sätter opacity till noll innan animering
             weatherInfoEl.style.opacity = 0;
 
-            //imer för att fördröja intoning
+            //Timer för att fördröja intoning
             setTimeout(() => {
                 // Uppdatera innerHTML för weatherInfo
                 weatherInfoEl.innerHTML = `<p>Nedanför ISS har vi detta väder:</p>`;
@@ -180,7 +180,6 @@ function refreshData() {
 
             // Skapa en markör för ISS position och lägg till den på kartan
             issMarker = L.marker([latitude, longitude]).addTo(map);
-            //issMarker.bindPopup('Position: ' + latitude + ', ' + longitude + '.').openPopup(); // Lägger till popup med text
 
             // Flytta kartan till ISS position
             map.setView([latitude, longitude], 2);

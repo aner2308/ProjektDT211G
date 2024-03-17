@@ -1,5 +1,6 @@
 @use "keyframes";
 @use "components";
+@use "base";
 
 #heightInfo,
 #weatherInfo,
@@ -26,7 +27,7 @@ body {
     grid-template-rows: auto;
 }
 
-#bildISS {
+.bildISS {
     margin-top: 50px;
     grid-area: 1/2/2/3;
     width: 10vw;
@@ -38,13 +39,13 @@ body {
 
 #rubrik {
     grid-area: 2/2/3/3;
-    color: whitesmoke;
+    color: base.$text-color;
     text-align: center;
     @include components.rubrikstorlek(2);
 }
 
 .brödtext {
-    color: whitesmoke;
+    color: base.$text-color;
     text-align: center;
     @include components.rubrikstorlek(3);
     line-height: 1.4em;
@@ -70,7 +71,7 @@ body {
 }
 
 .brödtext.loaded {
-    color: whitesmoke;
+    color: base.$text-color;
 }
 
 
@@ -81,14 +82,14 @@ body {
     margin: auto;
     margin-top: 5vw;
     background-color: hsl(0, 0%, 0%, 0.6);
-    color: whitesmoke;
+    color: base.$text-color;
     text-transform: uppercase;
     @include components.rubrikstorlek(2);
     font-family: "Space Grotesk", sans-serif;
     letter-spacing: 0.1em;
     border-style: solid;
     border-width: 0.1em;
-    border-color: whitesmoke;
+    border-color: base.$text-color;
     transition: 0.5s;
 }
 
@@ -154,7 +155,7 @@ body {
     grid-area: 7/2/8/3;
     width: 5vw;
     height: 5vw;
-    background-color: whitesmoke;
+    background-color: base.$text-color;
     border-radius: 50%;
     margin: auto;
     box-shadow: inset -1vw -1vw 1vw rgb(43, 43, 43),
@@ -168,7 +169,7 @@ body {
 #heightInfo {
     grid-area: 8/2/9/3;
     text-align: left;
-    color: whitesmoke;
+    color: base.$text-color;
     @include components.rubrikstorlek(3);
     min-height: 100px;
     padding: 0px 20px;
@@ -178,7 +179,7 @@ body {
 #weatherInfo {
     grid-area: 9/2/10/3;
     text-align: left;
-    color: whitesmoke;
+    color: base.$text-color;
     @include components.rubrikstorlek(3);
     min-height: 150px;
     padding: 0px 20px;
@@ -187,7 +188,7 @@ body {
 #timeInfo {
     grid-area: 10/2/11/3;
     text-align: left;
-    color: whitesmoke;
+    color: base.$text-color;
     @include components.rubrikstorlek(3);
     min-height: 100px;
     padding: 0px 20px;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="scss/main.scss">
-    <title>Projekt</title>
+    <title>DownFromISS</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,16 +19,18 @@
 </head>
 
 <body>
-    
-
     <div id="container">
-        <img id="bildISS" src="img/ISS.png" alt="Illustration av ISS rymdstation">
+        <picture>
+            <source class="bildISS" srcset="img/ISS.png?as=avif&width=200&height=200" type="image/avif">
+            <source class="bildISS" srcset="img/ISS.png?as=webp&width=200&height=200" type="image/webp">
+            <source class="bildISS" srcset="img/ISS.png?width=200&height=200" type="image/jpg">
+            <img class="bildISS" src="img/ISS.png" alt="Illustration av ISS rymdstation">
+        </picture>
         <h1 id="rubrik">Vad missar astronauterna?</h1>
         <p class="brödtext ett">Denna webbsida tar fram positionen för den internationella rymdstationen ISS, och ger oss information om platsen på jorden rakt nedanför.</p>
         <p class="brödtext två">I rymden existerar inte väder som det gör på Jorden. Kanske blickar dom ner och önskar att dom åter fick uppleva soliga dagar, duggregn, eller snöfall...</p>
         <p class="brödtext tre">Tryck på knappen för att få reda på väder och lokal tid under rymdfärjan.</p>
         <button id="Btn" style="--clr:#1e9bff">ISS POSITION</button>
-
         <div id="sun"></div>
         <div id="mapShade"></div>
         <div id="map"></div>
@@ -40,7 +42,6 @@
         <div id="heightInfo"></div>
         <div id="weatherInfo"></div>
         <div id="timeInfo"></div>
-
     </div>
 </body>
 
